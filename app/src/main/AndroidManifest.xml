@@ -2,7 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <uses-permission android:name="android.permission.BATTERY_STATS"
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <uses-permission
+        android:name="android.permission.BATTERY_STATS"
         tools:ignore="ProtectedPermissions" />
 
     <application
@@ -16,6 +19,9 @@
         android:theme="@style/ThemeDefault"
         tools:targetApi="31">
         <activity
+            android:name=".features.battery.BatteryActivity"
+            android:exported="false" />
+        <activity
             android:name=".features.home.HomeActivity"
             android:exported="true">
             <intent-filter>
@@ -26,13 +32,24 @@
         </activity>
         <activity
             android:name=".MainActivity"
+            android:exported="false"></activity>
+
+        <receiver android:name=".broadcast.ChargingReceiver"
             android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.ACTION_POWER_CONNECTED" />
+                <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED" />
+                <action android:name="android.intent.action.BATTERY_CHANGED" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name=".broadcast.BatteryReceiver"
+            android:exported="false">
+            <intent-filter>
+s                <action android:name="android.intent.action.BATTERY_CHANGED" />
+            </intent-filter>
+        </receiver>
 
-        </activity>
-
-
-        <receiver android:name=".broadcast.ChargingReceiver"/>
-        <service android:name=".service.ChargingService"/>
+        <service android:name=".service.ChargingService" />
     </application>
 
 </manifest>

@@ -5,6 +5,7 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.os.IBinder
 import com.example.charging.broadcast.ChargingReceiver
+import com.example.charging.features.home.HomeActivity
 
 
 class ChargingService: Service() {
