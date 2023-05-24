@@ -1,10 +1,13 @@
 package com.example.charging.features.battery
 
 import android.os.BatteryManager
+import android.os.Build
 import android.os.Bundle
 import android.os.Handler
+import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import com.example.charging.databinding.ActivityBatteryBinding
+
 
 class BatteryActivity : AppCompatActivity(){
 
@@ -17,16 +20,24 @@ class BatteryActivity : AppCompatActivity(){
         binding = ActivityBatteryBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
+            setShowWhenLocked(true)
+            setTurnScreenOn(true)
+        } else {
+            window.addFlags(
+                WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED
+                        or WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON
+            )
+        }
     }
 
     override fun onResume() {
         super.onResume()
 
 //        Mo comment ham ni de sau 5 giay tu dong tat
-//        Handler().postDelayed({
-//            finish()
-//        }, 5000)
+        Handler().postDelayed({
+            finishAffinity()
+        }, 5000)
 
         handler.postDelayed(Runnable {
             handler.postDelayed(runnable!!, 500)

@@ -26,7 +26,7 @@ class HomeActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        stopService(Intent(this, ChargingService::class.java))
+//        stopService(Intent(this, ChargingService::class.java))
     }
 
     private fun initEventListener(){

@@ -15,6 +15,8 @@ class ChargingReceiver: BroadcastReceiver() {
             "Start charging".toast(p0)
             val intent = Intent(p0, BatteryActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
             p0?.startActivity(intent)
         } else {
             "Stop charging".toast(p0)

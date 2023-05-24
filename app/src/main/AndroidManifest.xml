@@ -4,6 +4,8 @@
 
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
     <uses-permission
         android:name="android.permission.BATTERY_STATS"
         tools:ignore="ProtectedPermissions" />
@@ -20,7 +22,9 @@
         tools:targetApi="31">
         <activity
             android:name=".features.battery.BatteryActivity"
-            android:exported="false" />
+            android:exported="true"
+            android:showOnLockScreen="true"
+            android:launchMode="singleTop"/>
         <activity
             android:name=".features.home.HomeActivity"
             android:exported="true">
@@ -40,12 +44,6 @@
                 <action android:name="android.intent.action.ACTION_POWER_CONNECTED" />
                 <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED" />
                 <action android:name="android.intent.action.BATTERY_CHANGED" />
-            </intent-filter>
-        </receiver>
-        <receiver android:name=".broadcast.BatteryReceiver"
-            android:exported="false">
-            <intent-filter>
-s                <action android:name="android.intent.action.BATTERY_CHANGED" />
             </intent-filter>
         </receiver>
 
